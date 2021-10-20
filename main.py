@@ -144,8 +144,7 @@ def main():
         elif opt == "4":
             print(intreg_este_div_pt_fract(lst))
         elif opt == "5":
-            numar = int(input("da "))
-            print(divizor(numar))
+            pass
         elif opt == "x":
             break
         else:
