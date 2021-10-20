@@ -61,7 +61,68 @@ def test_interval_deschis():
     assert interval_deschis([1, 2.2, 3.3, 4.4], 1.2, 4.4) == [2.2, 3.3]
 
 
+def divizor(num):
+    """
+    determina divizorii unui numar
+    :param num:
+    :return:
+    """
+    result = []
+    for i in range(2, int(num)//2 +1):
+        if int(num) % i == 0:
+            result.append(i)
+    return result
 
+def fractionar(num):
+    """
+    determina partea fractioanara a unui numar
+    :param num: numarul caruia i se calculeaza partea fractioanara
+    :return: partea fractioanra a numarului
+    """
+    return str(num).split('.')[1]
+
+
+def test_fractionar():
+    assert fractionar(1.2) == "2"
+    assert fractionar(1.45) == '45'
+    assert fractionar(20.652) == '652'
+
+
+def intreg_este_div_pt_fract(lst):
+    """
+    Determina daca partea intreaga a numerelor din lista este divizor al partii fractionare a numarului
+    :param lst: lista de float-uri
+    :return: o lista de numere a caror parte intreaga este divizor al partii fractionare a numarului
+    """
+    result = []
+    for num in lst:
+        intreg = int(num)
+        fract = fractionar(num)
+        if intreg in (divizor(fract)):
+            result.append(num)
+    return result
+
+
+def test_intreg_este_div_pt_fract():
+    assert intreg_este_div_pt_fract([1.2, 3.6, 5.7, 9.18]) == [1.2, 3.6, 9.18]
+    assert intreg_este_div_pt_fract([]) == []
+    assert intreg_este_div_pt_fract([1.5, -3.3, 8, 9.8, 3.2]) == [1.5, -3.3]
+    assert intreg_este_div_pt_fract([-1.2, -2.8, -3.5, -7.12]) == [-1.2, -2.8]
+
+
+def inlocuire_lista(lst):
+    """
+    Inlocuieste numerele din lista cu caractere
+    :param lst: lista de float-uri
+    :return: lista de caractere
+    """
+    pass
+
+
+def test_inlocuire_lista():
+    assert inlocuire_lista([1.5, 2.3, 6.7]) == [unuvirgulacinci, doivirgulatrei, sasevirgulasapte]
+    assert inlocuire_lista([]) == []
+    assert inlocuire_lista([2.3, 6.7]) == [doivirgulatrei, sasevirgulasapte]
 
 
 def main():
@@ -81,9 +142,10 @@ def main():
             rezultat = interval_deschis(lst, capat1, capat2)
             print("Numerele cuprinse intre " + str(capat1) + " si " + str(capat2) + " sunt: ", rezultat)
         elif opt == "4":
-            pass
+            print(intreg_este_div_pt_fract(lst))
         elif opt == "5":
-            pass
+            numar = int(input("da "))
+            print(divizor(numar))
         elif opt == "x":
             break
         else:
@@ -91,6 +153,9 @@ def main():
 
 
 if __name__ == '__main__':
+    #test_intreg_este_div_pt_fract()
+    #test_inlocuire_lista()
+    test_fractionar()
     test_interval_deschis()
     test_parte_intreaga()
     main()
